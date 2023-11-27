@@ -2,28 +2,29 @@ package gft
 
 import (
 	"bufio"
-	"log"
+	"errors"
 	"os"
 	"strings"
 )
 
+var ErrFileNotFound = errors.New("no such test file or directory")
+
 // FromFile returns all test names in the file passed to it
-func FromFile(filename string) string {
+func FromFile(filename string) ([]string, error) {
+	testNames := []string{}
 	file, err := os.Open(filename)
 	if err != nil {
-		log.Fatal(err)
-		return ""
+		return testNames, ErrFileNotFound
 	}
 
 	scanner := bufio.NewScanner(file)
-	var testName string
 	for scanner.Scan() {
 		line := scanner.Text()
 		if i := strings.Index(line, "func Test"); i != -1 {
 			startIndex := i + 5
 			parenthesesIndex := strings.Index(line, "(")
-			testName = line[startIndex:parenthesesIndex]
+			testNames = append(testNames, line[startIndex:parenthesesIndex])
 		}
 	}
-	return testName
+	return testNames, nil
 }

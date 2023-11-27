@@ -9,8 +9,8 @@ import (
 
 var ErrFileNotFound = errors.New("no such test file or directory")
 
-// FromFile returns all test names in the file passed to it
-func FromFile(filename string) ([]string, error) {
+// TestsFromFile returns all tests in the file passed to it
+func TestsFromFile(filename string) ([]string, error) {
 	testNames := []string{}
 	file, err := os.Open(filename)
 	if err != nil {

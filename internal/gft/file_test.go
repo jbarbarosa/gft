@@ -7,7 +7,7 @@ import (
 )
 
 func TestShouldListTestNamesFromFiles(t *testing.T) {
-	file := "file_test"
+	file := "file_test.go"
 	expected := "TestShouldListTestNamesFromFiles"
 
 	if got := gft.FromFile(file); got != expected {

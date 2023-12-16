@@ -9,13 +9,16 @@ import (
 )
 
 func main() {
-	switch arg := os.Args[1]; arg {
-
+	if len(os.Args) < 2 {
+		fmt.Println("go file test: pass the name of a go test file to run all its tests")
+		os.Exit(1)
+	}
+	switch args := os.Args[1]; args {
 	case "version":
 		fmt.Println("gft version 0.1.0")
 
 	default:
-		path, file := gft.SplitPathFile(os.Args[1])
+		path, file := gft.SplitPathFile(args)
 		if len(file) < 1 {
 			fmt.Println("fatal: go test file not found in path:", path)
 			os.Exit(1)

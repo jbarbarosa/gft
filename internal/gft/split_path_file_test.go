@@ -19,9 +19,14 @@ func TestShouldSplitPathFromFile(t *testing.T) {
 			expected: [2]string{"somewhere/over/the/rainbow", ""},
 		},
 		{
-			name:     "should return path and empty file when the it does not match *_test.go",
+			name:     "should return path and empty file when it does not match *_test.go",
 			fullpath: "somewhere/over/the/rainbow.txt",
 			expected: [2]string{"somewhere/over/the/rainbow.txt", ""},
+		},
+		{
+			name:     "should return path and file when it matches *_test.go",
+			fullpath: "somewhere/over/the/rainbow_test.go",
+			expected: [2]string{"somewhere/over/the/", "rainbow_test.go"},
 		},
 	} {
 		t.Run(test.name, func(t *testing.T) {

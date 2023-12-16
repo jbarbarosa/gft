@@ -2,12 +2,9 @@ package gft
 
 import (
 	"bufio"
-	"errors"
 	"os"
 	"strings"
 )
-
-var ErrFileNotFound = errors.New("no such test file or directory")
 
 // TestsFromFile returns all tests in the file passed to it
 func TestsFromFile(filename string) ([]string, error) {

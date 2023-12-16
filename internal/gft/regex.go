@@ -2,7 +2,7 @@ package gft
 
 import "strings"
 
-func Regex(testNames []string) string {
+func CreateRegex(testNames []string) string {
 	regex := "^Test("
 	for _, name := range testNames {
 		name = strings.TrimPrefix(name, "Test")

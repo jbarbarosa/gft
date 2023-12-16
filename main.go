@@ -13,8 +13,7 @@ func main() {
 	if err != nil {
 		fmt.Println("unable to run tests from file")
 	}
-	regex := gft.Regex(tests)
-	fmt.Println("Running tests with the following regex:", regex)
+	regex := gft.CreateRegex(tests)
 	exec := exec.Command("go", "test", "-run", regex, ".")
 	out, err := exec.Output()
 	if err != nil {

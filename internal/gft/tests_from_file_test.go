@@ -1,7 +1,6 @@
 package gft_test
 
 import (
-	"errors"
 	"os"
 	"reflect"
 	"testing"
@@ -10,28 +9,15 @@ import (
 )
 
 func TestShouldListTestNamesFromFiles(t *testing.T) {
-	expected := []string{"TestShouldListTestNamesFromFiles", "TestShouldReturnErrorIfFileIsNotFound"}
+	expected := []string{"TestShouldListTestNamesFromFiles"}
 
-	var names []string
-	err := gft.OpenFile("tests_from_file_test.go", func(file *os.File) {
-		names = gft.TestsFromFile(file)
-	})
+	file, err := os.Open("tests_from_file_test.go")
 	if err != nil {
 		t.Fatalf("expected no errors, got %s", err)
 	}
+	names := gft.TestsFromFile(file)
 
 	if !reflect.DeepEqual(names, expected) {
 		t.Fatalf("expected test name: %s, got %s", expected, names)
-	}
-}
-
-func TestShouldReturnErrorIfFileIsNotFound(t *testing.T) {
-	err := gft.OpenFile("gone.go", func(file *os.File) {
-		// expected not to be called
-		t.Fatal("expected an error due to no file found, got no errors")
-	})
-
-	if !errors.Is(err, gft.ErrFileNotFound) {
-		t.Fatalf("expected error to be errfilenotfound, err is instead %s", err)
 	}
 }

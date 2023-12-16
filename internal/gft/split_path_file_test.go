@@ -28,6 +28,11 @@ func TestShouldSplitPathFromFile(t *testing.T) {
 			fullpath: "somewhere/over/the/rainbow_test.go",
 			expected: []string{"somewhere/over/the/", "rainbow_test.go"},
 		},
+		{
+			name:     "should return path and empty string when it is not properly formatted as a path",
+			fullpath: "somewhereovertherainbow_test.go",
+			expected: []string{"somewhereovertherainbow_test.go", ""},
+		},
 	} {
 		t.Run(test.name, func(t *testing.T) {
 			path, file := gft.SplitPathFile(test.fullpath)

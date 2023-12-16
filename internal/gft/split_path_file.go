@@ -2,10 +2,13 @@ package gft
 
 import "strings"
 
-func SplitPathFile(path string) [2]string {
-	lastslash := strings.LastIndex(path, "/")
-	if strings.Index(path[lastslash:], "_test.go") == -1 {
-		return [2]string{path, ""}
+func SplitPathFile(fullpath string) (path string, file string) {
+	lastslash := strings.LastIndex(fullpath, "/")
+	if strings.Index(fullpath[lastslash:], "_test.go") == -1 {
+		path = fullpath
+		return
 	}
-	return [2]string{path[:lastslash+1], path[lastslash+1:]}
+	path = fullpath[:lastslash+1]
+	file = fullpath[lastslash+1:]
+	return
 }

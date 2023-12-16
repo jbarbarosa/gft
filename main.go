@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"os"
 	"os/exec"
 
@@ -9,7 +10,12 @@ import (
 )
 
 func main() {
-	gft.OpenFile(os.Args[1], func(file *os.File) {
+	path, file := gft.SplitPathFile(os.Args[1])
+	if len(file) < 1 {
+		log.Fatalf("fatal: go test file not found in path: %s", path)
+	}
+	gft.EnsureDirFromPath(path)
+	gft.OpenFile(file, func(file *os.File) {
 		tests := gft.TestsFromFile(file)
 		regex := gft.CreateRegex(tests)
 		exec := exec.Command("go", "test", "-run", regex, ".")

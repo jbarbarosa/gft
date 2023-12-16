@@ -11,26 +11,28 @@ func TestShouldSplitPathFromFile(t *testing.T) {
 	for _, test := range []struct {
 		name     string
 		fullpath string
-		expected [2]string
+		expected []string
 	}{
 		{
 			name:     "should return path and empty file when only dirs are passed",
 			fullpath: "somewhere/over/the/rainbow",
-			expected: [2]string{"somewhere/over/the/rainbow", ""},
+			expected: []string{"somewhere/over/the/rainbow", ""},
 		},
 		{
 			name:     "should return path and empty file when it does not match *_test.go",
 			fullpath: "somewhere/over/the/rainbow.txt",
-			expected: [2]string{"somewhere/over/the/rainbow.txt", ""},
+			expected: []string{"somewhere/over/the/rainbow.txt", ""},
 		},
 		{
 			name:     "should return path and file when it matches *_test.go",
 			fullpath: "somewhere/over/the/rainbow_test.go",
-			expected: [2]string{"somewhere/over/the/", "rainbow_test.go"},
+			expected: []string{"somewhere/over/the/", "rainbow_test.go"},
 		},
 	} {
 		t.Run(test.name, func(t *testing.T) {
-			if got := gft.SplitPathFile(test.fullpath); !reflect.DeepEqual(got, test.expected) {
+			path, file := gft.SplitPathFile(test.fullpath)
+			got := []string{path, file}
+			if !reflect.DeepEqual(got, test.expected) {
 				t.Fatalf("slice does not match expectation: got %v, want %v", got, test.expected)
 			}
 		})

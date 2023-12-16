@@ -18,6 +18,11 @@ func TestShouldSplitPathFromFile(t *testing.T) {
 			fullpath: "somewhere/over/the/rainbow",
 			expected: [2]string{"somewhere/over/the/rainbow", ""},
 		},
+		{
+			name:     "should return path and empty file when the it does not match *_test.go",
+			fullpath: "somewhere/over/the/rainbow.txt",
+			expected: [2]string{"somewhere/over/the/rainbow.txt", ""},
+		},
 	} {
 		t.Run(test.name, func(t *testing.T) {
 			if got := gft.SplitPathFile(test.fullpath); !reflect.DeepEqual(got, test.expected) {

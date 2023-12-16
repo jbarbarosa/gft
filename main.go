@@ -17,7 +17,7 @@ func main() {
 	default:
 		path, file := gft.SplitPathFile(os.Args[1])
 		if len(file) < 1 {
-			fmt.Println("fatal: go test file not found in path: %s", path)
+			fmt.Println("fatal: go test file not found in path:", path)
 			os.Exit(1)
 		}
 		gft.EnsureDirFromPath(path)

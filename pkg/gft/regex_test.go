@@ -3,7 +3,7 @@ package gft_test
 import (
 	"testing"
 
-	"github.com/jbarbarosa/gft/internal/gft"
+	"github.com/jbarbarosa/gft/pkg/gft"
 )
 
 func TestShouldCreateRegexFromTestNames(t *testing.T) {

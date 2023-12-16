@@ -4,7 +4,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/jbarbarosa/gft/internal/gft"
+	"github.com/jbarbarosa/gft/pkg/gft"
 )
 
 func TestShouldSplitPathFromFile(t *testing.T) {

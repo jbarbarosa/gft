@@ -5,7 +5,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/jbarbarosa/gft/internal/gft"
+	"github.com/jbarbarosa/gft/pkg/gft"
 )
 
 func TestShouldReturnAnErrorIfDirectoryDoesNotExist(t *testing.T) {

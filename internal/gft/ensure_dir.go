@@ -1,7 +1,16 @@
 package gft
 
-import "os"
+import (
+	"errors"
+	"fmt"
+	"os"
+)
+
+var ErrDirNotFound = errors.New("provided directory not found")
 
 func EnsureDirFromPath(path string) error {
-	return os.Chdir(path)
+	if err := os.Chdir(path); err != nil {
+		return fmt.Errorf("ensure dir: %s, %w", path, ErrDirNotFound)
+	}
+	return nil
 }

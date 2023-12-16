@@ -8,13 +8,14 @@ import (
 )
 
 func main() {
-	if len(os.Args) < 2 {
-		fmt.Println("go file test: pass the name of a go test file to run all its tests")
+	version := "0.1.0"
+	if len(os.Args) < 2 || os.Args[1] == "help" || os.Args[1] == "--help" {
+		cmd.Help()
 		os.Exit(1)
 	}
 	switch os.Args[1] {
 	case "version":
-		fmt.Println("gft version 0.1.0")
+		fmt.Printf("gft version %s\n", version)
 	default:
 		cmd.Run(os.Args[1])
 	}

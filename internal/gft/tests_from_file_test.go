@@ -14,7 +14,7 @@ func TestShouldListTestNamesFromFiles(t *testing.T) {
 
 	var names []string
 	err := gft.OpenFile("tests_from_file_test.go", func(file *os.File) {
-		names, _ = gft.TestsFromFile(file)
+		names = gft.TestsFromFile(file)
 	})
 	if err != nil {
 		t.Fatalf("expected no errors, got %s", err)

@@ -7,7 +7,7 @@ import (
 )
 
 // TestsFromFile returns all tests in the file passed to it
-func TestsFromFile(file *os.File) ([]string, error) {
+func TestsFromFile(file *os.File) []string {
 	testNames := []string{}
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
@@ -18,5 +18,5 @@ func TestsFromFile(file *os.File) ([]string, error) {
 			testNames = append(testNames, line[startIndex:parenthesesIndex])
 		}
 	}
-	return testNames, nil
+	return testNames
 }

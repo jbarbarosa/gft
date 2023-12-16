@@ -10,10 +10,7 @@ import (
 
 func main() {
 	gft.OpenFile(os.Args[1], func(file *os.File) {
-		tests, err := gft.TestsFromFile(file)
-		if err != nil {
-			fmt.Println("unable to run tests from file")
-		}
+		tests := gft.TestsFromFile(file)
 		regex := gft.CreateRegex(tests)
 		exec := exec.Command("go", "test", "-run", regex, ".")
 		out, err := exec.Output()

@@ -7,13 +7,8 @@ import (
 )
 
 // TestsFromFile returns all tests in the file passed to it
-func TestsFromFile(filename string) ([]string, error) {
+func TestsFromFile(file *os.File) ([]string, error) {
 	testNames := []string{}
-	file, err := os.Open(filename)
-	if err != nil {
-		return testNames, ErrFileNotFound
-	}
-
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
 		line := scanner.Text()

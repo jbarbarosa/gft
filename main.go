@@ -9,15 +9,17 @@ import (
 )
 
 func main() {
-	tests, err := gft.TestsFromFile(os.Args[1])
-	if err != nil {
-		fmt.Println("unable to run tests from file")
-	}
-	regex := gft.CreateRegex(tests)
-	exec := exec.Command("go", "test", "-run", regex, ".")
-	out, err := exec.Output()
-	if err != nil {
-		fmt.Println("error running tests: ", err)
-	}
-	fmt.Println(string(out))
+	gft.OpenFile(os.Args[1], func(file *os.File) {
+		tests, err := gft.TestsFromFile(file)
+		if err != nil {
+			fmt.Println("unable to run tests from file")
+		}
+		regex := gft.CreateRegex(tests)
+		exec := exec.Command("go", "test", "-run", regex, ".")
+		out, err := exec.Output()
+		if err != nil {
+			fmt.Println("error running tests: ", err)
+		}
+		fmt.Println(string(out))
+	})
 }

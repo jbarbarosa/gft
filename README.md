@@ -7,7 +7,7 @@ Go file test: pass in a file to run all its tests at once, without tediously map
 ## Install
 Simplest way is by running:
 ```
-    go install github.com/jbarbarosa/gft@v0.1.0
+    go install github.com/jbarbarosa/gft@v0.1.1
 ```
 Alternatively, clone the repository and run `make`
 

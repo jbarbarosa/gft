@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	version := "0.1.0"
+	version := "0.1.1"
 	if len(os.Args) < 2 || os.Args[1] == "help" || os.Args[1] == "--help" {
 		cmd.Help()
 		os.Exit(1)
